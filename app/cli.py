@@ -21,7 +21,7 @@ def call(method: str, path: str, data: dict | None = None):
 def main():
     parser = argparse.ArgumentParser(description="TaskFlow AI Enterprise CLI")
     sub = parser.add_subparsers(dest="cmd", required=True)
-    reg = sub.add_parser("register"); reg.add_argument("username"); reg.add_argument("email"); reg.add_argument("password"); reg.add_argument("--role", default="member")
+    reg = sub.add_parser("register"); reg.add_argument("username"); reg.add_argument("email"); reg.add_argument("password")
     log = sub.add_parser("login"); log.add_argument("username"); log.add_argument("password")
     team = sub.add_parser("team-create"); team.add_argument("name"); team.add_argument("--description")
     proj = sub.add_parser("project-create"); proj.add_argument("name"); proj.add_argument("--team-id", type=int); proj.add_argument("--description")
@@ -34,7 +34,7 @@ def main():
     job = sub.add_parser("job"); job.add_argument("job_type")
     sub.add_parser("run-jobs")
     args = parser.parse_args()
-    if args.cmd == "register": result = call("POST", "/auth/register", {"username": args.username, "email": args.email, "password": args.password, "role": args.role})
+    if args.cmd == "register": result = call("POST", "/auth/register", {"username": args.username, "email": args.email, "password": args.password, "role": "member"})
     elif args.cmd == "login": result = call("POST", "/auth/login", {"username": args.username, "password": args.password})
     elif args.cmd == "team-create": result = call("POST", "/teams", {"name": args.name, "description": args.description})
     elif args.cmd == "project-create": result = call("POST", "/projects", {"name": args.name, "description": args.description, "team_id": args.team_id})

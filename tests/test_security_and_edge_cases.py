@@ -2,6 +2,20 @@ import jwt
 from app.config import get_settings
 
 
+def test_public_registration_forces_member_role(client):
+    created = client.post(
+        "/auth/register",
+        json={
+            "username": "forced-member",
+            "email": "forced-member@example.com",
+            "password": "secret123",
+            "role": "admin",
+        },
+    )
+    assert created.status_code == 201
+    assert created.json()["role"] == "member"
+
+
 def test_login_returns_jwt(client):
     created = client.post(
         "/auth/register",

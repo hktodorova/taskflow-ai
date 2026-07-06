@@ -146,12 +146,12 @@ http://127.0.0.1:8000/docs
 
 ## Quick API Demo
 
-Register admin:
+Register user:
 
 ```bash
 curl -X POST http://127.0.0.1:8000/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"admin","email":"admin@example.com","password":"secret123","role":"admin"}'
+        -d '{"username":"demo-user","email":"demo-user@example.com","password":"secret123","role":"member"}'
 ```
 
 Login:
@@ -159,7 +159,7 @@ Login:
 ```bash
 curl -X POST http://127.0.0.1:8000/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"secret123"}'
+        -d '{"username":"demo-user","password":"secret123"}'
 ```
 
 Use the returned token:
@@ -197,8 +197,8 @@ More examples: [`docs/API_EXAMPLES.md`](docs/API_EXAMPLES.md)
 ## CLI Usage
 
 ```bash
-python -m app.cli register admin admin@example.com secret123 --role admin
-python -m app.cli login admin secret123
+python -m app.cli register demo-user demo-user@example.com secret123
+python -m app.cli login demo-user secret123
 export TASKFLOW_TOKEN="paste-token-here"
 python -m app.cli team-create "AI Team"
 python -m app.cli project-create "Exam Project"
@@ -258,7 +258,7 @@ make test
 Latest local result:
 
 ```text
-12 passed in 1.69s
+16 passed in 15.18s
 ```
 
 The test suite validates:
@@ -276,6 +276,8 @@ The test suite validates:
 
 The project demonstrates AI-assisted development through architecture planning, code generation, debugging, test generation and documentation.
 
+AI tools were used differently across the main modules: architecture planning for the layered API structure, code generation for CRUD and validation scaffolding, and debugging/refinement for JWT auth, dependency cycle checks and test fixes.
+
 More details: [`docs/AI_ASSISTED_WORKFLOW.md`](docs/AI_ASSISTED_WORKFLOW.md)
 
 ## Submission Checklist
@@ -286,7 +288,6 @@ See [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md).
 
 Potential future enhancements include:
 
-- JWT authentication
 - PostgreSQL support
 - Docker deployment
 - Kubernetes deployment

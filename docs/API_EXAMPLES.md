@@ -12,12 +12,12 @@ Open Swagger:
 http://127.0.0.1:8000/docs
 ```
 
-## Register admin
+## Register user
 
 ```bash
 curl -X POST http://127.0.0.1:8000/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"admin","email":"admin@example.com","password":"secret123","role":"admin"}'
+  -d '{"username":"demo-user","email":"demo-user@example.com","password":"secret123","role":"member"}'
 ```
 
 ## Login
@@ -25,7 +25,7 @@ curl -X POST http://127.0.0.1:8000/auth/register \
 ```bash
 curl -X POST http://127.0.0.1:8000/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"secret123"}'
+  -d '{"username":"demo-user","password":"secret123"}'
 ```
 
 Copy `access_token` and use it as a Bearer token.
@@ -51,3 +51,5 @@ curl -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8000/dashboard
 ```bash
 pytest -v
 ```
+
+Public registration creates a `member` user. Use the admin-only `/users` endpoint if you need to create additional users with specific roles.
